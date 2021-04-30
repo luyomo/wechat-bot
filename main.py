@@ -46,21 +46,17 @@ async def getWechat(signature: str, echostr: int, timestamp: str, nonce: str):
 #signature=b5b0785974ab1fedd6c75c34100b8d95fad1d85d&echostr=108915514908556663&timestamp=1619271956&nonce=526119712
 @app.post("/")
 async def postWechat(request: Request, user_agent: Optional[str] = Header(None)):
+    headers = {'CONTENT_TYPE': 'text/html'}
     __data = await request.body()
     __msg = parse_message(__data)
-    print(f"What's the message <{__msg.content}>")
-    print(f"{user_agent}")
     if __msg.type == 'text':
          __p = re.compile('doge')
          if __p.match(__msg.content) != None:
              __reply = TextReply(content=__topDoge.run(), message=__msg)
-             print(f"The reply is {__reply}")
              __xml = __reply.render()
              #return __xml
-             headers = {'CONTENT_TYPE': 'text/html'}
-             return Response(content=__xml, headers=headers)
+             #return Response(content=__xml, headers=headers)
 
-         #print(f"The matched message is {__m}")
          #articles = [
          #    {
          #        'title': 'test',
@@ -70,13 +66,13 @@ async def postWechat(request: Request, user_agent: Optional[str] = Header(None))
          #    }
          #]
 
-         #__reply = TextReply(content="How &#13;&#10; are you", message=__msg)
          #__reply = TextReply(content=__msg.content, message=__msg)
-         #__reply = create_reply(__msg.content, __msg)
          #__reply = create_reply(articles, __msg)
+         else:
+             __reply = TextReply(content="I don't know what are you talking about.", message=__msg)
+             __xml = __reply.render()
+    else:
+         __reply = TextReply(content="I don't know what are you talking about.", message=__msg)
+         __xml = __reply.render()
 
-    __reply = TextReply(content="I don't know what are you talking about.", message=__msg)
-    __xml = __reply.render()
-    headers = {'CONTENT_TYPE': 'text/html'}
     return Response(content=__xml, headers=headers)
-    return __xml
