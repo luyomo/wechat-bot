@@ -1,0 +1,6 @@
+db:
+    name: "cryptodb"
+    user: "crytpodb"
+    host: "192.168.0.1"
+    password: "password"
+dogeTopUrl: https://bitinfocharts.com/zh/top-100-richest-dogecoin-addresses.html

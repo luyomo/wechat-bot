@@ -1,0 +1,8 @@
+wechat-sdk==0.6.4
+elementpath==2.2.1
+xmltodict==0.9.2
+falcon==3.0.0
+wechatpy==1.8.15
+pyyaml==5.4.1
+texttable==1.6.3
+pymongo==3.11.3
